@@ -11,5 +11,6 @@ COPY uwsgi.ini /jwt_task/uwsgi.ini
 RUN pip install -r requirements.txt
 RUN python3 manage.py makemigrations shorter_url
 RUN python3 manage.py migrate
+RUN python3 manage.py collectstatic
 
-CMD uwsgi --ini uwsgi.ini
+CMD gunicorn jwt_url_task.wsgi:application
